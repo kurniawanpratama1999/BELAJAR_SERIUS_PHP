@@ -55,13 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <?php if (!empty($errors)):
-        foreach ($errors as $e): ?>
+    <?php if (!empty($errors)): ?>
+        <?php foreach ($errors as $e): ?>
             <div style="color:red;"><?= htmlspecialchars($e) ?></div>
-        <?php endforeach; endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
 
     <?php if (!empty($success)): ?>
-        <div style="color:green"><?= $success ?></div><?php endif; ?>
+        <div style="color:green"><?= $success ?></div>
+    <?php endif; ?>
 
     <form action="upload.php" method="post" enctype="multipart/form-data">
         <input type="file" name="avatar" accept="image/*">
@@ -80,9 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 - Saat proses POST, bandingkan token dari form dengan token di session.
 
 Contoh potongan:
-*/
-
-/*
 // saat menampilkan form
 session_start();
 if (empty($_SESSION['csrf_token'])) {

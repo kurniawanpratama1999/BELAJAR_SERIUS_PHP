@@ -26,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($old['message'] === '') {
         $errors['message'] = 'Pesan wajib diisi.';
-    } elseif (strlen($old['message']) < 10) {
-        $errors['message'] = 'Pesan minimal 10 karakter.';
+    } elseif (strlen($old['message']) < 10 || strlen($old['message']) > 255) {
+        $errors['message'] = 'Pesan minimal 10 karakter dan maksimal 255 karakter.';
     }
 
     // Jika tidak ada error, proses (misal simpan atau kirim email)
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Gunakan prepared statements bila menyimpan ke database.
         $_SESSION['success'] = 'Terima kasih! Pesan Anda telah diterima.';
         // POST-Redirect-GET untuk menghindari resubmission form
-        header('Location: contact.php');
+        header('Location: 02-Contact.php');
         exit;
     }
 }
@@ -60,7 +60,7 @@ if ($success) {
         <div style="color: green;"><?= htmlspecialchars($success) ?></div>
     <?php endif; ?>
 
-    <form action="contact.php" method="post" novalidate>
+    <form action="02-Contact.php" method="post" novalidate>
         <div>
             <label>Nama</label><br>
             <input type="text" name="name" value="<?= htmlspecialchars($old['name']) ?>">
@@ -79,7 +79,8 @@ if ($success) {
             <label>Pesan</label><br>
             <textarea name="message"><?= htmlspecialchars($old['message']) ?></textarea>
             <?php if (isset($errors['message'])): ?>
-                <div style="color:red;"><?= htmlspecialchars($errors['message']) ?></div><?php endif; ?>
+                <div style="color:red;"><?= htmlspecialchars($errors['message']) ?></div>
+            <?php endif; ?>
         </div>
 
         <button type="submit">Kirim</button>

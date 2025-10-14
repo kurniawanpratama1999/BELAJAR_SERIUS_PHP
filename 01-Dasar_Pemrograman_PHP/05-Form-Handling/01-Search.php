@@ -27,7 +27,7 @@ $keyword = isset($_GET['q']) ? trim($_GET['q']) : '';
 </head>
 
 <body>
-    <form action="search.php" method="get">
+    <form method="get">
         <label for="q">Cari:</label>
         <input type="text" id="q" name="q" value="<?= htmlspecialchars($keyword) ?>">
         <button type="submit">Cari</button>
