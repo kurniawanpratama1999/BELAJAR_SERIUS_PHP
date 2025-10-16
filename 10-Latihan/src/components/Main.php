@@ -1,3 +1,6 @@
-<?php function MainComponent() { ob_start(); ?>
-    <main>ini main</main>
-<?php return ob_get_clean(); } ?>
+<?php function MainComponent($content)
+{
+    ob_start(); ?>
+    <main><?= $content ?></main>
+    <?php return ob_get_clean();
+} ?>
